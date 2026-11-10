@@ -2,7 +2,15 @@ pipeline {
     agent none
 
     stages {
+        stage('show branch') {
+            agent any
+            steps {
+                echo "This build is running on branch: ${env.BRANCH_NAME}"
+            }
+        }
+
         stage('build & deploy on built-in node') {
+            when { branch 'main' }
             agent { label 'built-in' }
             steps {
                 sh 'docker build -t node-app:builtin .'
@@ -12,6 +20,7 @@ pipeline {
         }
 
         stage('build & deploy on docker agent') {
+            when { branch 'main' }
             agent { label 'docker-agent' }
             steps {
                 sh 'docker build -t node-app:agent .'
