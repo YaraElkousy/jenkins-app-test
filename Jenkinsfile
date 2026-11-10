@@ -31,7 +31,7 @@ pipeline {
     }
     post {
         always {
-            mail to: 'YOUR_GMAIL@gmail.com',
+            mail to: 'yaraaelkousy@gmail.com',
                  subject: "Jenkins: ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${currentBuild.currentResult}",
                  body: """Build status: ${currentBuild.currentResult}
                     Job: ${env.JOB_NAME}
