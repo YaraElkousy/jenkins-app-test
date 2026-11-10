@@ -29,4 +29,15 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            mail to: 'YOUR_GMAIL@gmail.com',
+                 subject: "Jenkins: ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${currentBuild.currentResult}",
+                 body: """Build status: ${currentBuild.currentResult}
+                    Job: ${env.JOB_NAME}
+                    Build number: ${env.BUILD_NUMBER}
+                    Branch: ${env.BRANCH_NAME}
+                    Build URL: ${env.BUILD_URL}"""
+        }
+    }
 }
